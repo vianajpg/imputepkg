@@ -21,18 +21,11 @@ singlesnpinp <- function(OS = OS, P = P) {
         if(is.na(newOS[i,j]) & P[i,5] == 2 & P[i,6] == 2) {
           newOS[i,j] <- 2
         } else {
-          if(is.na(newOS[i,j]) & P[i,5] == 0 & P[i,6] == 2) {
-            newOS[i,j] <- 1
-          } else {
-            if(is.na(newOS[i,j]) & P[i,5] == 2 & P[i,6] == 0) {
-              newOS[i,j] <- 1
-            } else {
-              newOS[i,j] <- 3
-            }
-          }
+          newOS[i,j] <- 3
         }
       }
     }
   }
+
   return(newOS)
 }
