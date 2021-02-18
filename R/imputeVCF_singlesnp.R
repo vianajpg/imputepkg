@@ -8,6 +8,11 @@
 #' @return Imputed Offspring VCF
 #' @export
 imputeVCF_singlesnp <- function(P_in_vcf = "", OS_in_vcf = "", OS_new_out_vcf = ""){
+  print("This function is in maintenance to fix a issue in the inbred generation")
+  print("Meanwhile, you can use the function imputeVCF_haplo")
+  print("Thanks!")
+  stop()
+'
   wd <- getwd()
   if(!require(BiocManager)){
     install.packages("BiocManager")
@@ -62,4 +67,6 @@ imputeVCF_singlesnp <- function(P_in_vcf = "", OS_in_vcf = "", OS_new_out_vcf = 
   snpgdsCreateGeno(gds.fn = paste0(wd,OS_new_out_vcf,".GDS"), genmat = newOS[,5:ncol(newOS)], sample.id = OS_sample_id, snp.id = newOS[,3], snp.chromosome = newOS[,1], snp.position = newOS[,2], snp.allele = newOS[,4], snpfirstdim = TRUE)
   seqSNP2GDS(gds.fn = paste0(wd,OS_new_out_vcf,".GDS"), out.fn = paste0(wd,OS_new_out_vcf,".SEQ"))
   seqGDS2VCF(gdsfile = paste0(wd,OS_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,OS_new_out_vcf,".VCF"))
+
+'
 }
