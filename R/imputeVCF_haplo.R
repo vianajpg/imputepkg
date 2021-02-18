@@ -1,13 +1,15 @@
-#' Impute Offspring VCF per SNP
+#' Impute Inbred VCF per defined window
 #'
-#' This function impute VCF data from the offsprings based on the VCF data from the parents
+#' This function impute VCF data from the inbred populations based on the VCF data from the parents
 #'
 #' @param P_in_vcf Parents original VCF
-#' @param IP_in_vcf Offspring original VCF
-#' @param IP_new_out_vcf Name for an output - Imputed Offspring VCF
-#' @return Imputed Offspring VCF
+#' @param IP_in_vcf Inbred Populations original VCF
+#' @param IP_new_out_vcf Name for an output - Imputed Inbred VCF
+#' @param win Size of the discrete window
+#' @return Imputed inbred populations VCF
 #' @export
-imputeVCF_singlesnp <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = ""){
+
+imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", win = 5){
   wd <- getwd()
   if(!require(BiocManager)){
     install.packages("BiocManager")
@@ -57,7 +59,7 @@ imputeVCF_singlesnp <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = 
 
   # Creating the sliding window
 
-  win <- 5
+  win <- win
   step <- win
   pos <- seq(from = 1, to = nrow(x = refgen))
   sp <- seq(from = 1, to = c(nrow(x = refgen)-step), by = step)
