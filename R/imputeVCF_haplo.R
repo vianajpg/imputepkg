@@ -23,16 +23,16 @@ imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", 
     BiocManager::install(pkgs = "SeqArray")
   }
 
-  if(!file.exists(paste0(wd,"P_in_vcf.GDS"))){
-    snpgdsVCF2GDS(vcf.fn = P_in_vcf, out.fn = paste0(wd,"P_in_vcf.GDS"), snpfirstdim = TRUE)
+  if(!file.exists(paste0(wd,"/","P_in_vcf.GDS"))){
+    snpgdsVCF2GDS(vcf.fn = P_in_vcf, out.fn = paste0(wd,"/","P_in_vcf.GDS"), snpfirstdim = TRUE)
   }
 
-  if(!file.exists(paste0(wd, "IP_in_vcf.GDS"))){
-    snpgdsVCF2GDS(vcf.fn = IP_in_vcf, out.fn = paste0(wd,"IP_in_vcf.GDS"), snpfirstdim = TRUE)
+  if(!file.exists(paste0(wd, "/","IP_in_vcf.GDS"))){
+    snpgdsVCF2GDS(vcf.fn = IP_in_vcf, out.fn = paste0(wd,"/","IP_in_vcf.GDS"), snpfirstdim = TRUE)
   }
 
-  Pgdsinp <- snpgdsOpen(filename = paste0(wd,"P_in_vcf.GDS"))
-  IPgdsinp <- snpgdsOpen(filename = paste0(wd,"IP_in_vcf.GDS"))
+  Pgdsinp <- snpgdsOpen(filename = paste0(wd,"/","P_in_vcf.GDS"))
+  IPgdsinp <- snpgdsOpen(filename = paste0(wd,"/","IP_in_vcf.GDS"))
 
   P_sample_id <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "sample.id"))
   P_snp_id <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.id"))
@@ -201,7 +201,7 @@ imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", 
 
 
   ##########
-  snpgdsCreateGeno(gds.fn = paste0(wd,IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
-  seqSNP2GDS(gds.fn = paste0(wd,IP_new_out_vcf,".GDS"), out.fn = paste0(wd,IP_new_out_vcf,".SEQ"))
-  seqGDS2VCF(gdsfile = paste0(wd,IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,IP_new_out_vcf,".VCF"))
+  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
+  seqSNP2GDS(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), out.fn = paste0(wd,"/",IP_new_out_vcf,".SEQ"))
+  seqGDS2VCF(gdsfile = paste0(wd,"/",IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,"/",IP_new_out_vcf,".VCF"))
 }
