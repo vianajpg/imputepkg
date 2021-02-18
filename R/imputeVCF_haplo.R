@@ -201,7 +201,7 @@ imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", 
 
 
   ##########
-  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
+  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snp.id = IP_snp_id, snpfirstdim = TRUE)
   seqSNP2GDS(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), out.fn = paste0(wd,"/",IP_new_out_vcf,".SEQ"))
   seqGDS2VCF(gdsfile = paste0(wd,"/",IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,"/",IP_new_out_vcf,".VCF"))
 }
