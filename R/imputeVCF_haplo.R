@@ -35,14 +35,14 @@ imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", 
   IPgdsinp <- snpgdsOpen(filename = paste0(wd,"/","IP_in_vcf.GDS"))
 
   P_sample_id <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "sample.id"))
-  P_snp_id <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.id"))
+  P_snp_id <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.rs.id"))
   P_snp_pos <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.position"))
   P_snp_chr <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.chromosome"))
   P_snp_allele <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "snp.allele"))
   P_genotype <- read.gdsn(node = index.gdsn(node = Pgdsinp, index = "genotype"))
 
   IP_sample_id <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "sample.id"))
-  IP_snp_id <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "snp.id"))
+  IP_snp_id <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "snp.rs.id"))
   IP_snp_pos <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "snp.position"))
   IP_snp_chr <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "snp.chromosome"))
   IP_snp_allele <- read.gdsn(node = index.gdsn(node = IPgdsinp, index = "snp.allele"))
@@ -201,7 +201,7 @@ imputeVCF_haplo <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", 
 
 
   ##########
-  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snp.id = IP_snp_id, snpfirstdim = TRUE)
+  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
   seqSNP2GDS(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), out.fn = paste0(wd,"/",IP_new_out_vcf,".SEQ"))
   seqGDS2VCF(gdsfile = paste0(wd,"/",IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,"/",IP_new_out_vcf,".VCF"))
 }
