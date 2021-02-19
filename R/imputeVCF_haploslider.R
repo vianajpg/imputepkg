@@ -6,11 +6,11 @@
 #' @param IP_in_vcf Inbred Populations original VCF
 #' @param IP_new_out_vcf Name for an output - Imputed Inbred VCF
 #' @param win Size of the sliding window
-#' @param step Amount of SNPs jumped after each step
+#' @param stp Amount of SNPs jumped after each step
 #' @return Imputed inbred populations VCF
 #' @export
 
-imputeVCF_haploslider <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", win = 5, step = 2){
+imputeVCF_haploslider <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf = "", win = 5, stp = 2){
   wd <- getwd()
   if(!require(BiocManager)){
     install.packages("BiocManager")
@@ -61,7 +61,7 @@ imputeVCF_haploslider <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf 
   # Creating the sliding window
 
   pos <- seq(from = 1, to = nrow(x = refgen))
-  sp <- seq(from = 1, to = c(nrow(x = refgen)-step), by = step)
+  sp <- seq(from = 1, to = c(nrow(x = refgen)-stp), by = stp)
   ep <- sp + (win - 1)
 
   if(tail(x = ep, n = 1) != nrow(x = refgen)){
@@ -200,7 +200,7 @@ imputeVCF_haploslider <- function(P_in_vcf = "", IP_in_vcf = "", IP_new_out_vcf 
 
 
   ##########
-  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
-  seqSNP2GDS(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), out.fn = paste0(wd,"/",IP_new_out_vcf,".SEQ"))
-  seqGDS2VCF(gdsfile = paste0(wd,"/",IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,"/",IP_new_out_vcf,".VCF"))
+#  snpgdsCreateGeno(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), genmat = newtargetgen, sample.id = IP_sample_id, snp.id = IP_snp_id, snp.chromosome = IP_snp_chr, snp.position = IP_snp_pos, snp.allele = IP_snp_allele, snpfirstdim = TRUE)
+#  seqSNP2GDS(gds.fn = paste0(wd,"/",IP_new_out_vcf,".GDS"), out.fn = paste0(wd,"/",IP_new_out_vcf,".SEQ"))
+#  seqGDS2VCF(gdsfile = paste0(wd,"/",IP_new_out_vcf,".SEQ"), vcf.fn = paste0(wd,"/",IP_new_out_vcf,".VCF"))
 }
